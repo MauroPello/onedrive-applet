@@ -1,0 +1,22 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "maurobum43@gmail.com",
+                "Name": "MauroPello"
+            }
+        ],
+        "Category": "Onedrive synchronization",
+        "Description": "A widget to easily synchronize with onedrive storage!",
+        "Icon": "onedrive",
+        "Id": "com.github.MauroPello.onedrive-applet",
+        "Name": "Onedrive Applet",
+        "ServiceTypes": [
+            "Plasma/Applet"
+        ],
+        "Version": "1",
+        "Website": "https://github.com/MauroPello/onedrive-applet"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

@@ -11,6 +11,7 @@
         "Icon": "onedrive",
         "Id": "com.github.MauroPello.onedrive-applet",
         "Name": "Onedrive Applet",
+        "EnabledByDefault": true,
         "ServiceTypes": [
             "Plasma/Applet"
         ],
@@ -18,5 +19,7 @@
         "Website": "https://github.com/MauroPello/onedrive-applet"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-NotificationArea": "true",
+    "X-Plasma-NotificationAreaCategory": "ApplicationStatus"
 }

@@ -15,11 +15,11 @@
         "ServiceTypes": [
             "Plasma/Applet"
         ],
-        "Version": "1",
+        "Version": "1.0",
         "Website": "https://github.com/MauroPello/onedrive-applet"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-NotificationArea": "true",
-    "X-Plasma-NotificationAreaCategory": "ApplicationStatus"
+    "X-Plasma-NotificationAreaCategory": "ApplicationStatus",
+    "X-Plasma-MainScript": "ui/main.qml"
 }

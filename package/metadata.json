@@ -8,7 +8,7 @@
         ],
         "Category": "Onedrive synchronization",
         "Description": "A widget to easily synchronize with onedrive storage!",
-        "Icon": "onedrive",
+        "Icon": "onedrive.png",
         "Id": "com.github.MauroPello.onedrive-applet",
         "Name": "Onedrive Applet",
         "EnabledByDefault": true,

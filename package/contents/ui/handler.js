@@ -1,11 +1,14 @@
 let busy = false;
+let lastAction = "";
 let busyText = "Currently busy!";
 let notBusyText = "Not doing anything!";
 
-function isBusy(){
-    return !busy;
+// to set the last action done for user messages
+function setLastAction(value){
+    lastAction = value;
 }
 
+// toggle for state
 function toggleBusy(){
     busy = !busy;
     downloadButton.enabled = !busy;
@@ -13,24 +16,9 @@ function toggleBusy(){
     subLabel.text = getInfo();
 }
 
+// returns current state (used for toolTipSubText)
 function getInfo(){
     if(busy)
         return busyText;
     return notBusyText;
-}
-
-function upload(){
-    toggleBusy();
-
-    // upload "onedrive --synchronize --upload-only"
-
-    toggleBusy();
-}
-
-function download(){
-    toggleBusy();
-
-    // download "onedrive --synchronize --download-only"
-
-    toggleBusy();
 }

@@ -12,7 +12,7 @@ Item {
     Plasmoid.toolTipMainText: "Onedrive"
     Plasmoid.toolTipSubText: subLabel.text
 
-    // invisible label used just as placeholde for the js script to modify the toolTipSubText dynamically
+    // invisible label used just as placeholder for the js script to modify the toolTipSubText dynamically
     PlasmaComponents.Label {
         id: subLabel
         text: Handler.notBusyText
@@ -23,5 +23,6 @@ Item {
     // Never show the full popup view even if there is space for it.
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
+    // fullRepresentation written in the FullRepresentation file
     Plasmoid.fullRepresentation: FullRepresentation { }
 }

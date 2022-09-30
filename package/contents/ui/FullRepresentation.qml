@@ -112,10 +112,26 @@ RowLayout {
             msg = msg.replace(/^.*ETA.*$/mg, "");
             // removing lines that cointain "Internet connectivity"
             msg = msg.replace(/^.*Internet connectivity.*$/mg, "");
+            // removing lines that cointain "Creating local directory"
+            msg = msg.replace(/^.*Creating local directory.*$/mg, "");
 
-            // removing not needed words
-            msg = msg.replace("new file", "").replace("file", "").replace("from Onedrive:", "")
-            msg = msg.replace("...", "").replace("done.", "").replace("item", "").replace("modified", "").trim()
+            // removing all occurencies of not needed words
+            msg = msg.replace("new file", "")
+            msg = msg.replace(new RegExp("new file".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "")
+            msg = msg.replace(new RegExp("file".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "")
+            msg = msg.replace(new RegExp("from OneDrive:".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "")
+            msg = msg.replace(new RegExp("...".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "")
+            msg = msg.replace(new RegExp("done.".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "")
+            msg = msg.replace(new RegExp("item".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "")
+            msg = msg.replace(new RegExp("modified".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "")
+
+            // verb-ing -> verb-ed
+            msg = msg.replace(new RegExp("Uploading".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "Uploaded")
+            msg = msg.replace(new RegExp("Downloading".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "Downloaded")
+            msg = msg.replace(new RegExp("Deleting".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "Deleted")
+            
+            // final trim just to make sure
+            msg = msg.trim()
 
             // title of the popup
             var title = "Onedrive " + Handler.lastAction + " finished!"

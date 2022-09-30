@@ -116,7 +116,6 @@ RowLayout {
             msg = msg.replace(/^.*Creating local directory.*$/mg, "");
 
             // removing all occurencies of not needed words
-            msg = msg.replace("new file", "")
             msg = msg.replace(new RegExp("new file".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "")
             msg = msg.replace(new RegExp("file".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "")
             msg = msg.replace(new RegExp("from OneDrive:".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "")

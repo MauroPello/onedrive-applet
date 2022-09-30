@@ -7,9 +7,6 @@ import org.kde.plasma.plasmoid 2.0
 
 import "handler.js" as Handler
 
-// exit button?
-// resync button?
-
 // RowLayout that allows to put buttons side by side easily
 RowLayout {
     // size for popup in system tray is fixed so it's not configured
@@ -107,12 +104,14 @@ RowLayout {
             msg = msg.replace(/^.*Uploading differences of.*$/mg, "");
             // removing lines that cointain "Uploading new items of"
             msg = msg.replace(/^.*Uploading new items of.*$/mg, "");
-            // removing lines that cointain "Trying"
-            msg = msg.replace(/^.*Trying.*$/mg, "");
+            // removing lines that cointain "Trying to delete"
+            msg = msg.replace(/^.*Trying to delete.*$/mg, "");
             // removing lines that cointain "DONE IN"
             msg = msg.replace(/^.*DONE IN.*$/mg, "");
             // removing lines that cointain "ETA"
             msg = msg.replace(/^.*ETA.*$/mg, "");
+            // removing lines that cointain "Internet connectivity"
+            msg = msg.replace(/^.*Internet connectivity.*$/mg, "");
 
             // removing not needed words
             msg = msg.replace("new file", "").replace("file", "").replace("from Onedrive:", "")

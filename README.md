@@ -10,3 +10,13 @@ xdg-icon-resource install --size 128 onedrive.png
 xdg-icon-resource install --size 128 onedrive-upload.png
 xdg-icon-resource install --size 128 onedrive-download.png
 ```
+
+to install the plasmoid run ./install.sh in the terminal
+to uninstall the plasmoid run ./uninstall.sh in the terminal
+
+you maybe need to execute:
+```
+chmod +x install.sh
+chmod +x uninstall.sh
+```
+in order to use the scripts

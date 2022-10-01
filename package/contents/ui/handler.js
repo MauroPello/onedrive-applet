@@ -11,8 +11,7 @@ function setLastAction(value){
 // toggle for state
 function toggleBusy(){
     busy = !busy;
-    downloadButton.enabled = !busy;
-    uploadButton.enabled = !busy;
+    main.enabled = !busy;
     subLabel.text = getInfo();
 }
 

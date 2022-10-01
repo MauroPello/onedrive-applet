@@ -48,14 +48,8 @@ GridLayout {
             // setting the current action as the last action
             Handler.setLastAction("upload")
             
-            // command and optional arguments
-            var cmd = "onedrive --synchronize --upload-only"
-            if(dryrunCb.checked){
-                cmd += " --dry-run"
-            }
-            
             // executing command
-            onedriveExec.exec(cmd)
+            onedriveExec.exec("onedrive --synchronize --upload-only")
         }
     }   
 
@@ -77,14 +71,8 @@ GridLayout {
             // setting the current action as the last action
             Handler.setLastAction("download")
             
-            // command and optional arguments
-            var cmd = "onedrive --synchronize --download-only"
-            if(dryrunCb.checked){
-                cmd += " --dry-run"
-            }
-            
             // executing command
-            onedriveExec.exec(cmd)
+            onedriveExec.exec("onedrive --synchronize --download-only")
         }
     }
 
@@ -96,7 +84,13 @@ GridLayout {
         font.pointSize: 12
         Layout.columnSpan: 2
         Layout.alignment: Qt.AlignHCenter
-        onClicked: onedriveExec.close(true)
+        onClicked: {
+            // closing popup after clicking button
+            plasmoid.expanded = false 
+            
+            // closing onedrive
+            onedriveExec.close(true)
+        }
         leftPadding: PlasmaCore.Units.largeSpacing
         rightPadding: PlasmaCore.Units.largeSpacing
         topPadding: PlasmaCore.Units.largeSpacing / 3
@@ -119,8 +113,17 @@ GridLayout {
             close(false)
         }
         function exec(cmd) {
-            Handler.toggleBusy()    // disabling FullRepresentation after clicking button
-            plasmoid.expanded = false  // closing popup after clicking button
+            // disabling FullRepresentation after clicking button
+            Handler.toggleBusy()    
+            
+            // optional argument
+            if(dryrunCb.checked){
+                cmd += " --dry-run"
+            }
+            
+            // closing popup after clicking button
+            plasmoid.expanded = false 
+
             connectSource(cmd)
             connectedSources = [cmd]
         }

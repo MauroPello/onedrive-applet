@@ -5,6 +5,8 @@ source ./update.sh
 source ./remove.sh
 
 to install the icons run this in the terminal:
-```xdg-icon-resource install --size 128 onedrive.png
+```
+xdg-icon-resource install --size 128 onedrive.png
 xdg-icon-resource install --size 128 onedrive-upload.png
-xdg-icon-resource install --size 128 onedrive-download.png```
+xdg-icon-resource install --size 128 onedrive-download.png
+```

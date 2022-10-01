@@ -17,6 +17,8 @@ GridLayout {
     // PlasmaCore.Theme.buttonBackgroundColor still
     // PlasmaCore.Theme.buttonHoverColor hover
     // PlasmaCore.Theme.buttonFocusColor down
+    // fix icon sizes
+    // font size
 
     // checkbox for dry-run mode
     PlasmaComponents3.CheckBox {
@@ -24,8 +26,8 @@ GridLayout {
         text: " Dry-run mode"
         font.pointSize: 12
         checked: false
-        indicator.width: 32
-        indicator.height: 32
+        indicator.width: PlasmaCore.Units.devicePixelRatio * 24
+        indicator.height: PlasmaCore.Units.devicePixelRatio * 24
         Layout.columnSpan: 2
         Layout.alignment: Qt.AlignHCenter
         Layout.topMargin: PlasmaCore.Units.largeSpacing * 2
@@ -35,8 +37,8 @@ GridLayout {
     PlasmaComponents3.Button {
         id: uploadBtn
         icon.name: "onedrive-upload"
-        icon.width: PlasmaCore.Units.iconSizes.huge
-        icon.height: PlasmaCore.Units.iconSizes.huge
+        icon.width: PlasmaCore.Units.devicePixelRatio * 64
+        icon.height: PlasmaCore.Units.devicePixelRatio * 64
         text: "Upload"
         font.pointSize: 12
         Layout.alignment: Qt.AlignHCenter
@@ -60,8 +62,8 @@ GridLayout {
     PlasmaComponents3.Button {
         id: downloadBtn
         icon.name: "onedrive-download"
-        icon.width: PlasmaCore.Units.iconSizes.huge
-        icon.height: PlasmaCore.Units.iconSizes.huge
+        icon.width: PlasmaCore.Units.devicePixelRatio * 64
+        icon.height: PlasmaCore.Units.devicePixelRatio * 64
         text: "Download"
         font.pointSize: 12
         Layout.alignment: Qt.AlignHCenter
@@ -90,10 +92,10 @@ GridLayout {
         Layout.columnSpan: 2
         Layout.alignment: Qt.AlignHCenter
         onClicked: onedriveExec.close(true)
-        leftPadding: PlasmaCore.Units.gridUnit
-        rightPadding: PlasmaCore.Units.gridUnit
-        topPadding: PlasmaCore.Units.gridUnit / 3
-        bottomPadding: PlasmaCore.Units.gridUnit / 3
+        leftPadding: PlasmaCore.Units.largeSpacing
+        rightPadding: PlasmaCore.Units.largeSpacing
+        topPadding: PlasmaCore.Units.largeSpacing / 3
+        bottomPadding: PlasmaCore.Units.largeSpacing / 3
         Layout.bottomMargin: PlasmaCore.Units.largeSpacing * 2
     }
 

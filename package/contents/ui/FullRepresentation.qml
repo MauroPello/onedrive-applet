@@ -10,7 +10,9 @@ import "handler.js" as Handler
 GridLayout {
     // used to disable the FullRepresentation while syncing
     id: main
+    // arranging two columns for the buttons to be side by side
     columns: 2
+    // filling the fullRepresentation
     anchors.fill: parent
 
     // top spacer
@@ -19,7 +21,7 @@ GridLayout {
         Layout.columnSpan: 2
         Layout.alignment: Qt.AlignHCenter
         Layout.fillWidth: true
-        Layout.preferredHeight: PlasmaCore.Units.gridUnit * 3
+        Layout.preferredHeight: PlasmaCore.Units.gridUnit * 2
         Layout.bottomMargin: 0
     }
 
@@ -37,6 +39,7 @@ GridLayout {
 
     // upload button
     PlasmaComponents3.Button {
+        id: uploadBtn
         icon.name: "onedrive-upload"
         icon.width: PlasmaCore.Units.gridUnit * 6
         icon.height: PlasmaCore.Units.gridUnit * 6
@@ -61,6 +64,7 @@ GridLayout {
 
     // download button
     PlasmaComponents3.Button {
+        id: downloadBtn
         icon.name: "onedrive-download"
         icon.width: PlasmaCore.Units.gridUnit * 6
         icon.height: PlasmaCore.Units.gridUnit * 6
@@ -83,13 +87,28 @@ GridLayout {
         }
     }
 
+    // checkbox for dry-run mode
+    PlasmaComponents3.Button {
+        id: stopBtn
+        text: "Stop syncing"
+        enabled: false
+        font.pointSize: 12
+        Layout.columnSpan: 2
+        Layout.alignment: Qt.AlignHCenter
+        onClicked: onedriveExec.close(true)
+        leftPadding: PlasmaCore.Units.gridUnit
+        rightPadding: PlasmaCore.Units.gridUnit
+        topPadding: PlasmaCore.Units.gridUnit / 3
+        bottomPadding: PlasmaCore.Units.gridUnit / 3
+    }
+
     // bottom spacer
     Rectangle {
         color: "transparent"
         Layout.columnSpan: 2
         Layout.alignment: Qt.AlignHCenter
         Layout.fillWidth: true
-        Layout.preferredHeight: PlasmaCore.Units.gridUnit * 3
+        Layout.preferredHeight: PlasmaCore.Units.gridUnit * 2
         Layout.bottomMargin: 0
     }
 
@@ -100,20 +119,25 @@ GridLayout {
         engine: "executable"
         connectedSources: []
         onNewData: {
-            var exitCode = data["exit code"]
-            var exitStatus = data["exit status"]
-            var stdout = data["stdout"]
-            var stderr = data["stderr"]
-            exited(exitCode, exitStatus, stdout, stderr)
-            disconnectSource(sourceName)
-            Handler.toggleBusy()    // enabling FullRepresentation after onedrive finished uploading
+            // closing command
+            close(false)
         }
         function exec(cmd) {
             Handler.toggleBusy()    // disabling FullRepresentation after clicking button
             plasmoid.expanded = false  // closing popup after clicking button
             connectSource(cmd)
+            connectedSources = [cmd]
         }
-        signal exited(int exitCode, int exitStatus, string stdout, string stderr)
+        function close(isUserTriggered){
+            var exitCode = data["exit code"]
+            var exitStatus = data["exit status"]
+            var stdout = data["stdout"]
+            var stderr = data["stderr"]
+            exited(exitCode, exitStatus, stdout, stderr, isUserTriggered)
+            disconnectSource(connectedSources[0])
+            Handler.toggleBusy()    // enabling FullRepresentation after onedrive finished uploading
+        }
+        signal exited(int exitCode, int exitStatus, string stdout, string stderr, bool isUserTriggered)
     }
 
     // simple DataSource to execute to terminal a command
@@ -139,6 +163,12 @@ GridLayout {
     Connections {
         target: onedriveExec
         onExited: {
+            if(isUserTriggered){
+                // displaying notification
+                executable.exec("kdialog --passivepopup \"File synchronization was successfully stopped\" --title \"Onedrive synchronization stopped!\" 5")
+                return
+            }
+
             // terminal stdout from onedrive command
             var msg = stdout
 

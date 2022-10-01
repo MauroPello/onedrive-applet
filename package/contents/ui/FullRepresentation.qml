@@ -8,22 +8,15 @@ import org.kde.plasma.plasmoid 2.0
 import "handler.js" as Handler
 
 GridLayout {
-    // used to disable the FullRepresentation while syncing
-    id: main
     // arranging two columns for the buttons to be side by side
     columns: 2
     // filling the fullRepresentation
     anchors.fill: parent
 
-    // top spacer
-    Rectangle {
-        color: "transparent"
-        Layout.columnSpan: 2
-        Layout.alignment: Qt.AlignHCenter
-        Layout.fillWidth: true
-        Layout.preferredHeight: PlasmaCore.Units.gridUnit * 2
-        Layout.bottomMargin: 0
-    }
+
+    // PlasmaCore.Theme.buttonBackgroundColor still
+    // PlasmaCore.Theme.buttonHoverColor hover
+    // PlasmaCore.Theme.buttonFocusColor down
 
     // checkbox for dry-run mode
     PlasmaComponents3.CheckBox {
@@ -35,14 +28,15 @@ GridLayout {
         indicator.height: 32
         Layout.columnSpan: 2
         Layout.alignment: Qt.AlignHCenter
+        Layout.topMargin: PlasmaCore.Units.largeSpacing * 2
     }
 
     // upload button
     PlasmaComponents3.Button {
         id: uploadBtn
         icon.name: "onedrive-upload"
-        icon.width: PlasmaCore.Units.gridUnit * 6
-        icon.height: PlasmaCore.Units.gridUnit * 6
+        icon.width: PlasmaCore.Units.iconSizes.huge
+        icon.height: PlasmaCore.Units.iconSizes.huge
         text: "Upload"
         font.pointSize: 12
         Layout.alignment: Qt.AlignHCenter
@@ -66,8 +60,8 @@ GridLayout {
     PlasmaComponents3.Button {
         id: downloadBtn
         icon.name: "onedrive-download"
-        icon.width: PlasmaCore.Units.gridUnit * 6
-        icon.height: PlasmaCore.Units.gridUnit * 6
+        icon.width: PlasmaCore.Units.iconSizes.huge
+        icon.height: PlasmaCore.Units.iconSizes.huge
         text: "Download"
         font.pointSize: 12
         Layout.alignment: Qt.AlignHCenter
@@ -100,16 +94,7 @@ GridLayout {
         rightPadding: PlasmaCore.Units.gridUnit
         topPadding: PlasmaCore.Units.gridUnit / 3
         bottomPadding: PlasmaCore.Units.gridUnit / 3
-    }
-
-    // bottom spacer
-    Rectangle {
-        color: "transparent"
-        Layout.columnSpan: 2
-        Layout.alignment: Qt.AlignHCenter
-        Layout.fillWidth: true
-        Layout.preferredHeight: PlasmaCore.Units.gridUnit * 2
-        Layout.bottomMargin: 0
+        Layout.bottomMargin: PlasmaCore.Units.largeSpacing * 2
     }
 
     // DataSource that executes onedrive commands in the terminal

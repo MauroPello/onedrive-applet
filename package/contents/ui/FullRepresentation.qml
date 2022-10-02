@@ -13,8 +13,6 @@ GridLayout {
     // filling the fullRepresentation
     anchors.fill: parent
 
-
-    // fix icon sizes
     // PlasmaCore.Units.devicePixelRatio
 
     // checkbox for dry-run mode

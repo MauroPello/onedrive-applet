@@ -13,8 +13,6 @@ GridLayout {
     // filling the fullRepresentation
     anchors.fill: parent
 
-    // PlasmaCore.Units.devicePixelRatio
-
     // checkbox for dry-run mode
     PlasmaComponents3.CheckBox {
         id: dryrunCb

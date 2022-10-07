@@ -8,3 +8,6 @@ After installing or uninstalling the plasmoid run
 plasmashell --replace &
 ```
 in order to reload the plasma session
+
+## Requirements
+In order to sync your files with onedrive you need the onedrive-abraunegg linux client up to date. If you want to use the "Stop syncing" button you need the killall command to be available in your linux system

@@ -116,6 +116,8 @@ GridLayout {
             
             // closing popup after clicking button
             plasmoid.expanded = false
+            // send notification about synchronization start
+            executable.exec("kdialog --passivepopup \"File synchronization was successfully started\" --title \"Onedrive synchronization started!\" 5")
 
             // by default onedrive will not be terminated by the user
             terminatedByUser.text = "false"

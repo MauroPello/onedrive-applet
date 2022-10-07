@@ -72,7 +72,7 @@ GridLayout {
         }
     }
 
-    // checkbox for dry-run mode
+    // stop syncing button
     PlasmaComponents3.Button {
         id: stopBtn
         text: "Stop syncing"
@@ -85,7 +85,8 @@ GridLayout {
             plasmoid.expanded = false 
             
             // closing onedrive
-            onedriveExec.close(true)
+            terminatedByUser.text = "true"
+            executable.exec("killall onedrive")
         }
         leftPadding: PlasmaCore.Units.largeSpacing
         rightPadding: PlasmaCore.Units.largeSpacing
@@ -104,10 +105,6 @@ GridLayout {
         id: onedriveExec
         engine: "executable"
         connectedSources: []
-        onNewData: {
-            // closing command
-            close(false)
-        }
         function exec(cmd) {
             // disabling FullRepresentation after clicking button
             Handler.toggleBusy()    
@@ -118,21 +115,24 @@ GridLayout {
             }
             
             // closing popup after clicking button
-            plasmoid.expanded = false 
+            plasmoid.expanded = false
 
+            // by default onedrive will not be terminated by the user
+            terminatedByUser.text = "false"
+
+            // execute command
             connectSource(cmd)
-            connectedSources = [cmd]
         }
-        function close(isUserTriggered){
+        onNewData: {
             var exitCode = data["exit code"]
             var exitStatus = data["exit status"]
             var stdout = data["stdout"]
             var stderr = data["stderr"]
-            exited(exitCode, exitStatus, stdout, stderr, isUserTriggered)
-            disconnectSource(connectedSources[0])
+            exited(exitCode, exitStatus, stdout, stderr)
+            disconnectSource(sourceName)
             Handler.toggleBusy()    // enabling FullRepresentation after onedrive finished uploading
         }
-        signal exited(int exitCode, int exitStatus, string stdout, string stderr, bool isUserTriggered)
+        signal exited(int exitCode, int exitStatus, string stdout, string stderr)
     }
 
     // simple DataSource to execute to terminal a command
@@ -154,18 +154,26 @@ GridLayout {
         signal exited(int exitCode, int exitStatus, string stdout, string stderr)
     }
 
+    // invisible label used to determine whether onedrive was terminated by the User or not
+    PlasmaComponents3.Label {
+        id: terminatedByUser
+        text: "false"
+        visible: false
+    }
+
     // when onedrive command is finished
     Connections {
         target: onedriveExec
         onExited: {
-            if(isUserTriggered){
+            // terminal stdout from onedrive command
+            var msg = stdout
+
+            // the command was terminated by the user
+            if(terminatedByUser.text == "true"){
                 // displaying notification
                 executable.exec("kdialog --passivepopup \"File synchronization was successfully stopped\" --title \"Onedrive synchronization stopped!\" 5")
                 return
             }
-
-            // terminal stdout from onedrive command
-            var msg = stdout
 
             // removing lines that cointain 
             var notWantedSentences = ["Configuration file successfully loaded", "Configuring Global Azure AD Endpoints", "Initializing the Synchronization Engine",

@@ -180,7 +180,7 @@ GridLayout {
             // removing lines that cointain 
             var notWantedSentences = ["Configuration file successfully loaded", "Configuring Global Azure AD Endpoints", 
             "Initializing the Synchronization Engine", "Syncing changes", "Uploading differences of", "Uploading new items of", 
-            "Trying to delete", "DONE IN", "ETA", "Internet connectivity", "Creating local directory", "DRY-RUN", "Skipping"]
+            "Trying to delete", "DONE IN", "ETA", "Internet connectivity", "Creating local directory", "DRY-RUN", "Skipping", "config file has been updated" ]
             notWantedSentences.forEach(function(sentence) {
                 msg = msg.split('\n').filter(function(line){ 
                     return line.indexOf(sentence) == -1;
@@ -194,9 +194,9 @@ GridLayout {
             })
 
             // verb-ing -> verb-ed
-            msg = msg.replace(new RegExp("Uploading".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "Uploaded")
-            msg = msg.replace(new RegExp("Downloading".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "Downloaded")
-            msg = msg.replace(new RegExp("Deleting".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "Deleted")
+            msg = msg.replace(new RegExp("Uploading".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "> Uploaded")
+            msg = msg.replace(new RegExp("Downloading".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "> Downloaded")
+            msg = msg.replace(new RegExp("Deleting".replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), "> Deleted")
             
             // final trim just to make sure
             msg = msg.trim()

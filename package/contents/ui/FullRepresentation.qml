@@ -180,7 +180,7 @@ GridLayout {
             // removing lines that cointain 
             var notWantedSentences = ["Configuration file successfully loaded", "Configuring Global Azure AD Endpoints", 
             "Initializing the Synchronization Engine", "Syncing changes", "Uploading differences of", "Uploading new items of", 
-            "Trying to delete", "DONE IN", "ETA", "Internet connectivity", "Creating local directory", "DRY-RUN", "Skipping", "config file has been updated" ]
+            "Trying to delete", "DONE IN", "ETA", "Internet connectivity", "Creating local directory", "DRY-RUN", "Skipping", "config file has been updated", "Sync with" ]
             notWantedSentences.forEach(function(sentence) {
                 msg = msg.split('\n').filter(function(line){ 
                     return line.indexOf(sentence) == -1;
